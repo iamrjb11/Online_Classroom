@@ -1,0 +1,62 @@
+
+
+
+.sidenav {
+  height: 100%;
+  width: 300px;
+  position: static;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  border-right: 2px solid #2f00ff;
+  border-radius: 10px;
+  overflow-x: hidden;
+  padding-top: 0px;
+  float: left;
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  -ms-border-radius: 10px;
+  -o-border-radius: 10px;
+}
+
+.sidenav a {
+  padding: 0px 0px 0px 20px;
+  text-decoration: none;
+  font-size: 25px;
+  color: #14914c;
+  display: block;
+}
+#sidenavT {
+  padding: 0px 0px 0px 20px;
+  text-decoration: none;
+  font-size: 40px;
+  color: #000000;
+  display: block;
+}
+
+.sidenav a:hover {
+  color: #00ff22;
+}
+
+.main {
+  padding-left: 350px;
+  
+}
+
+@media screen and (max-height: 450px) {
+  .sidenav {padding-top: 0px;}
+  .sidenav a {font-size: 18px;}
+}
+
+#borderStyleReg{
+  
+  border: 1px solid #2f00ff;
+  border-radius: 15px;
+  padding:30px
+}
+#borderStyle{
+  width: 60%;
+  border: 1px solid #2f00ff;
+  border-radius: 15px;
+  padding:30px
+}
