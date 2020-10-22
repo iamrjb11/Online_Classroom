@@ -6,8 +6,9 @@
 
 <div class="sidenav">
   <p id="sidenavT">Course List<br>-------------</p>
-  <a href="#services">C Programming</a>
-  
+  @foreach($course_list as $dt)
+    <a href="#services">{{$dt->c_name}}</a>
+  @endforeach  
 </div>
 
 <div class="main">
@@ -22,12 +23,6 @@
   </div>
   <div class="form-group">
     <input type="text" class="form-control" name="c_credit" placeholder="Course Credit">
-  </div>
-  <div class="form-group">
-    <input type="text" class="form-control" name="c_dept" placeholder="Department">
-  </div>
-  <div class="form-group">
-    <input type="text" class="form-control" name="c_varsity" placeholder="University">
   </div>
   <div class="form-group">
     <input type="text" class="form-control" name="c_term" placeholder="Term">

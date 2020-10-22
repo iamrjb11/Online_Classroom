@@ -55,17 +55,59 @@
                     <ul class="navbar-nav ml-auto">
                         <!-- Authentication Links -->
                         @guest
+
+                        @if(!Session::has('loginData'))
                         <li class="nav-item">
-                                <a class="nav-link" href="">{{ __('Login') }}</a>
-                            </li>
-                            
-                                <li class="nav-item">
-                                    <a class="nav-link" href="{{ url('/reg') }}">Register</a>
-                                </li>
-                           
+                            <a class="nav-link" href="{{ url('/login') }}">Login</a>
+                        </li>
+                    
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ url('/reg') }}">Register</a>
+                        </li>
+                        
+                        @else
+                        
+                        <!-- After login DropdownList -->
+                        <li class="nav-item dropdown">
+                                <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre style="color:blue;">
+                                    {{Session::get('name')}} <span class="caret"></span>
+                                </a>
+
+                                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                                    <a class="dropdown-item" href="{{ url('/') }}">Home</a>
+                                    <a class="dropdown-item" 
+                                    <?php if(Session::get('role')=='s'){ ?>
+                                    href="/student_panel" 
+                                    <?php } else{ ?>
+                                    href="/teacher_panel" 
+                                    <?php } ?>
+                                    >
+                                        Dashboard
+                                    </a>
+                                    <a class="dropdown-item" 
+                                    <?php if(Session::get('role')=='s'){ ?>
+                                    href="/student_profile" 
+                                    <?php } else{ ?>
+                                    href="/teacher_profile" 
+                                    <?php } ?>
+                                    >
+                                        Profile
+                                    </a>
+                                    <a class="dropdown-item" href="{{ url('/logout') }}" style="color:red">
+                                        Logout
+                                    </a>
+
+                                    <form id="logout-form" action="{{ url('logout') }}" method="POST" style="display: none;">
+                                        @csrf
+                                    </form>
+                                    <form id="panel-form" action="/company_panel" method="POST" style="display: none;">
+                                        @csrf
+                                    </form>
+                                </div>
+                            </li>                   
                            
 
-                            
+                            @endif
                         @endguest
                     </ul>
                 </div>

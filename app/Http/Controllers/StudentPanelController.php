@@ -18,13 +18,16 @@ class StudentPanelController extends Controller
     ///jokhon student_panel page load hobe
     public function load_student_panel(){
         //return "in";
-        $c_term="1-1";
+        $s_id=session()->get('id');
+        $s_term = DB::select("select s_term from student_info where s_id=? ",[$s_id]);//string-array(pblm)
+        $c_term = $s_term[0]->s_term;//convert array to string
 
         $teacher_list = DB::select("select DISTINCT t_name from teacher_info order by t_name ");
         $varsity_list = DB::select("select DISTINCT t_varsity from teacher_info order by t_name ");
         $course_list = DB::select("select DISTINCT c_name from course_list order by c_name ");
         $course_sugg = DB::select("select * from course_list INNER JOIN teacher_info on course_list.t_id=teacher_info.t_id where course_list.c_term=?",[$c_term] );
         $search_course=null;
+        //return session()->get('loginData');
         
         //only data return korbe...
         //return array('course_sugg'=>$course_sugg);
