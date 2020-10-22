@@ -12,27 +12,28 @@
 
 <div class="main">
 <p style="font-size:20px;">Create a Course :</p> 
-<form action="/action_page.php" id="borderStyle" >
+<form method="post" enctype="multipart/form-data" action="/create_course" id="borderStyle" >
+<input type="hidden" name="_token" value="{{ csrf_token() }}"> 
+  <div class="form-group">
+    <input type="text" class="form-control" name="c_no" placeholder="Course ID">
+  </div>
   <div class="form-group" >
-    <input type="email" class="form-control" id="email" placeholder="Course Name" style="weight:70%">
+    <input type="text" class="form-control" name="c_name" placeholder="Course Name" style="weight:70%">
   </div>
   <div class="form-group">
-    <input type="password" class="form-control" id="pwd" placeholder="Course ID">
+    <input type="text" class="form-control" name="c_credit" placeholder="Course Credit">
   </div>
   <div class="form-group">
-    <input type="text" class="form-control" id="pwd" placeholder="Course Credit">
+    <input type="text" class="form-control" name="c_dept" placeholder="Department">
   </div>
   <div class="form-group">
-    <input type="text" class="form-control" id="pwd" placeholder="Department">
+    <input type="text" class="form-control" name="c_varsity" placeholder="University">
   </div>
   <div class="form-group">
-    <input type="text" class="form-control" id="pwd" placeholder="University">
-  </div>
-  <div class="form-group">
-    <input type="text" class="form-control" id="pwd" placeholder="Term">
+    <input type="text" class="form-control" name="c_term" placeholder="Term">
   </div>
 
-  <button type="submit" style="width:100%" class="btn btn-success">Create</button>
+  <input type="submit" style="width:100%" class="btn btn-success" value="Create">
 </form>
 
 

@@ -19,12 +19,12 @@ Route::get('/', function () {
 Route::get('/reg', function () {
     return view('reg');
 });
-Route::get('/student_panel', function () {
-    return view('student_panel');
-});
+Route::get('/student_panel', 'StudentPanelController@load_student_panel');
 Route::get('/teacher_panel', function () {
     return view('teacher_panel');
 });
+
+Route::post('/create_course','TeacherPanelController@create_course');
 
 Route::post('/signup_teacher','RegistrationController@signup_teacher');
 Route::post('/signup_student','RegistrationController@signup_student');

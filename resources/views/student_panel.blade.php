@@ -22,6 +22,9 @@ Search Course :
   <div class="form-group">
   <select id="teacher_name" class="form-control">
         <option value="">-- Select Teacher --</option>
+        @foreach($teacher_list as $teacher)
+        <option value="{{$teacher->t_name}}">{{$teacher->t_name}}</option>
+        @endforeach
   </select>
   </div>
   <div class="form-group">
