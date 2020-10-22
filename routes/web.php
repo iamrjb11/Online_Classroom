@@ -20,6 +20,7 @@ Route::get('/reg', function () {
     return view('reg');
 });
 Route::get('/student_panel', 'StudentPanelController@load_student_panel');
+Route::post('/search_course', 'StudentPanelController@search_course');
 Route::get('/teacher_panel', function () {
     return view('teacher_panel');
 });

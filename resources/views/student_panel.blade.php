@@ -12,15 +12,19 @@
 
 <div class="main">
 Search Course : 
-<form class="form-inline" action="/action_page.php">
+<form method="post" enctype="multipart/form-data" class="form-inline" action="/search_course">
+<input type="hidden" name="_token" value="{{ csrf_token() }}"> 
   <div class="form-group">
     
-  <select id="course_name" class="form-control">
+  <select name="course_name" class="form-control">
         <option value="">-- Select Course --</option>
+        @foreach($course_list as $course)
+        <option value="{{$course->c_name}}">{{$course->c_name}}</option>
+        @endforeach
   </select>
   </div>
   <div class="form-group">
-  <select id="teacher_name" class="form-control">
+  <select name="teacher_name" class="form-control">
         <option value="">-- Select Teacher --</option>
         @foreach($teacher_list as $teacher)
         <option value="{{$teacher->t_name}}">{{$teacher->t_name}}</option>
@@ -28,11 +32,14 @@ Search Course :
   </select>
   </div>
   <div class="form-group">
-  <select id="varsity" class="form-control">
+  <select name="varsity" class="form-control">
         <option value="">-- Select University --</option>
+        @foreach($varsity_list as $varsity)
+        <option value="{{$varsity->t_varsity}}">{{$varsity->t_varsity}}</option>
+        @endforeach
   </select>
   </div><br>
-  <button type="submit" class="btn btn-success">Submit</button>
+  <input type="submit" class="btn btn-success" value="Search">
 </form>
 
 <table class="table table-striped">
@@ -49,33 +56,44 @@ Search Course :
       </tr>
     </thead>
     <tbody>
+    <!-- check the current url reqst is search_course??? -->
+  @if(\Request::is('search_course'))
+    
+  @foreach($search_course as $dt)
       <tr>
-        <td>CSE 1101</td>
-        <td>C Programming</td>
-        <td>3.00</td>
-        <td>Anis Sir</td>
-        <td>Professor</td>
-        <td>CSE</td>
-        <td>KU</td>
+        <td>{{ $dt->c_no }}</td>
+        <td>{{ $dt->c_name }}</td>
+        <td>{{ $dt->c_credit }}</td>
+        <td>{{ $dt->t_name }}</td>
+        <td>{{ $dt->t_des }}</td>
+        <td>{{ $dt->c_dept }}</td>
+        <td>{{ $dt->t_varsity }}</td>
         <td><input type="button" value="Request" class="btn btn-primary"></td>
 
       </tr>
+      @endforeach
+      @endif
       
     </tbody>
   </table>
   <div>Suggestions : </div>
   <div class="row">
+  <!--Array length use count(arrayName) -->
+  @for ($i=0;$i< count($course_sugg) ;$i++) 
+  @if($i > 6)
+  @break;
+  @endif
     <div class="col-md-2">
         <div class="thumbnail">
            
             <img src="{{ asset('img/online_course.png') }}" style="width:150px;height: 150px">
             <div class="caption" style="text-align: center;">
                 <p>
-                    <span id="">C Programming</span><br>
-                    <span id="">Anis Sir</span><br>
-                    <span id="">Professor</span>,
-                    <span id="">CSE</span><br>
-                    <span id="">Khulna University</span>
+                    <span id="">{{ $course_sugg[$i]->c_name }}</span><br>
+                    <span id="">{{ $course_sugg[$i]->t_name }}</span><br>
+                    <span id="">{{ $course_sugg[$i]->t_des }}</span>,
+                    <span id="">{{ $course_sugg[$i]->c_dept }}</span><br>
+                    <span id="">{{ $course_sugg[$i]->c_varsity }}</span>
                 </p>
                 <input id="" type="button" value="Request" class="btn btn-primary">
                 
@@ -83,10 +101,10 @@ Search Course :
             </div>
             
         </div>
+      
     </div>
-
-
-</div>
+   
+    @endfor
 
 
 </div>
