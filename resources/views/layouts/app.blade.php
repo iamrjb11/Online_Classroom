@@ -74,7 +74,7 @@
                                 </a>
 
                                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                                    <a class="dropdown-item" href="{{ url('/') }}">Home</a>
+                                    <!-- <a class="dropdown-item" href="{{ url('/') }}">Home</a> -->
                                     <a class="dropdown-item" 
                                     <?php if(Session::get('role')=='s'){ ?>
                                     href="/student_panel" 
@@ -116,7 +116,9 @@
 
         <main class="py-4">
             @yield('content')
+            
         </main>
+       
         <!-- @guest
         <h3></h3>
         @else

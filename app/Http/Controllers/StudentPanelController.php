@@ -26,12 +26,14 @@ class StudentPanelController extends Controller
         $varsity_list = DB::select("select DISTINCT t_varsity from teacher_info order by t_name ");
         $course_list = DB::select("select DISTINCT c_name from course_list order by c_name ");
         $course_sugg = DB::select("select * from course_list INNER JOIN teacher_info on course_list.t_id=teacher_info.t_id where course_list.c_term=?",[$c_term] );
+        $take_course = DB::select("select * from take_course");
+        
         $search_course=null;
         //return session()->get('loginData');
         
         //only data return korbe...
         //return array('course_sugg'=>$course_sugg);
-        return view('student_panel',array('teacher_list'=>$teacher_list,'varsity_list'=>$varsity_list,'course_list'=>$course_list,'course_sugg'=>$course_sugg,'search_course'=>$search_course));
+        return view('student_panel',array('teacher_list'=>$teacher_list,'varsity_list'=>$varsity_list,'course_list'=>$course_list,'course_sugg'=>$course_sugg,'search_course'=>$search_course,'take_course'=>$take_course));
 
     }
 
@@ -62,13 +64,19 @@ class StudentPanelController extends Controller
             $varsity_list = DB::select("select DISTINCT t_varsity from teacher_info order by t_name ");
             $course_list = DB::select("select DISTINCT c_name from course_list order by c_name ");
             $course_sugg = DB::select("select * from course_list INNER JOIN teacher_info on course_list.t_id=teacher_info.t_id where course_list.c_term=?",[$c_term] );
-           
+            $take_course = DB::select("select * from take_course");
             
             //only data return korbe...
             //return array('search_course'=>$search_course);
-            return view('student_panel',array('teacher_list'=>$teacher_list,'varsity_list'=>$varsity_list,'course_list'=>$course_list,'course_sugg'=>$course_sugg,'search_course'=>$search_course));
+            return view('student_panel',array('teacher_list'=>$teacher_list,'varsity_list'=>$varsity_list,'course_list'=>$course_list,'course_sugg'=>$course_sugg,'search_course'=>$search_course,'take_course'=>$take_course));
     
         
            // return view('student_panel',array('search_course'=>$search_course));
+    }
+    public function send_request($s_id,$c_id,$t_id){
+        $r_sts=0;// 0 means rqst send...
+        DB::insert("insert into take_course (s_id,c_id,t_id,r_sts) values(?,?,?,?)",[$s_id,$c_id,$t_id,$r_sts]);
+        return redirect('/student_panel');
+
     }
 }

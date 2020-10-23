@@ -5,13 +5,14 @@
     <h1 style="text-align:center"> WELCOME TO YOUR DASHBOARD</h1>      
 
 <div class="sidenav">
-  <p id="sidenavT">Course List<br>-------------</p>
-  <a href="#services">C Programming</a>
+  <p id="sidenavT">Course List<br>------------</p>
+  <a href="#services">C Programming - need code</a>
   
 </div>
 <br>
-<div class="main">
+<div class="mainS">
 Search Course : 
+
 <form method="post" enctype="multipart/form-data" class="form-inline" action="/search_course">
 <input type="hidden" name="_token" value="{{ csrf_token() }}"> 
   <div class="form-group">
@@ -38,21 +39,18 @@ Search Course :
         <option value="{{$varsity->t_varsity}}">{{$varsity->t_varsity}}</option>
         @endforeach
   </select>
-  </div><br>
-  <input type="submit" class="btn btn-success" value="Search">
+  </div><br><br>
+  <input type="submit" class="btn btn-success" value="Search" style="width:100%">
 </form>
+
 
 <table class="table table-striped">
     <thead>
       <tr>
-        <th>Course Code</th>
-        <th>Course Name</th>
-        <th>Course Credit</th>
-        <th>Teacher Name</th>
-        <th>Teacher Designation</th>
-        <th>Department</th>
-        <th>University</th>
-        <th>Request</th>
+        <th>Course Details</th>
+        <th>Teacher Details</th>
+        
+        <th>Action</th>
       </tr>
     </thead>
     <tbody>
@@ -61,14 +59,32 @@ Search Course :
     
   @foreach($search_course as $dt)
       <tr>
-        <td>{{ $dt->c_no }}</td>
-        <td>{{ $dt->c_name }}</td>
-        <td>{{ $dt->c_credit }}</td>
-        <td>{{ $dt->t_name }}</td>
-        <td>{{ $dt->t_des }}</td>
-        <td>{{ $dt->c_dept }}</td>
-        <td>{{ $dt->t_varsity }}</td>
-        <td><input type="button" value="Request" class="btn btn-primary"></td>
+        <td>{{ $dt->c_no }}<br><span style="font-weight:bolder;color:blue;font-size:17px">{{ $dt->c_name }}</span><br>Credit : {{$dt->c_credit}}<br>Term : {{$dt->c_term}}</td>
+        
+        <td><span style="font-weight:bolder;">{{ $dt->t_name }}</span><br>{{ $dt->t_des }},{{ $dt->c_dept }}<br>{{ $dt->t_varsity }}</td>
+       
+        <td><br>
+        
+                {{Session::put('i','0')}}
+                @foreach($take_course as $dt2)
+                  @if($dt2->c_id == $dt->c_id)
+                  
+                    {{Session::put('i','1')}} 
+                    @if($dt2->r_sts == 0)
+                    <p class="btn btn-danger">Wait for response</p>
+                    @break;
+                    @else
+                    <p class="btn btn-danger">Already Taken</p>
+                    @break;
+                    @endif
+                  @endif
+                @endforeach
+                <?php if( Session::get('i')== 0){ ?>
+                <a class="btn btn-primary" href="{{url('send_rqst')}}/{{Session::get('id')}}/{{$dt->c_id}}/{{$dt->t_id}}">Request</a>
+                <?php } ?>
+        
+        
+        </td>
 
       </tr>
       @endforeach
@@ -76,15 +92,16 @@ Search Course :
       
     </tbody>
   </table>
+  
   <div>Suggestions : </div>
   <div class="row">
   <!--Array length use count(arrayName) -->
   @for ($i=0;$i< count($course_sugg) ;$i++) 
-  @if($i > 6)
+  @if($i > 3)
   @break;
   @endif
-    <div class="col-md-2">
-        <div class="thumbnail">
+    <div class="col-md-4">
+        <div class="thumbnail" style="text-align: center;">
            
             <img src="{{ asset('img/online_course.png') }}" style="width:150px;height: 150px">
             <div class="caption" style="text-align: center;">
@@ -95,8 +112,24 @@ Search Course :
                     <span id="">{{ $course_sugg[$i]->c_dept }}</span><br>
                     <span id="">{{ $course_sugg[$i]->c_varsity }}</span>
                 </p>
-                <input id="" type="button" value="Request" class="btn btn-primary">
                 
+                {{Session::put('i','0')}}
+                @foreach($take_course as $dt)
+                  @if($dt->c_id == $course_sugg[$i]->c_id)
+                  
+                    {{Session::put('i','1')}} 
+                    @if($dt->r_sts == 0)
+                    <p class="btn btn-danger">Wait for response</p>
+                    @break;
+                    @else
+                    <p class="btn btn-danger">Already Taken</p>
+                    @break;
+                    @endif
+                  @endif
+                @endforeach
+                <?php if( Session::get('i')== 0){ ?>
+                <a class="btn btn-primary" href="{{url('send_rqst')}}/{{Session::get('id')}}/{{$course_sugg[$i]->c_id}}/{{$course_sugg[$i]->t_id}}">Request</a>
+                <?php } ?>
             
             </div>
             
@@ -108,6 +141,37 @@ Search Course :
 
 
 </div>
+
+
+</div>
+<div class="sidenavR_S">
+  <p id="sidenavT">Notifications</p>
+ 
+  
+
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>Course Name</th>
+        <th>Student Details</th>
+        <th>Action</th>
+      </tr>
+    </thead>
+    <tbody>
+    
+    <tr>
+        <td><br><span style="font-weight:bolder;color:blue;font-size:17px"></span></span><br>Credit : <br>Term : </td>
+        
+        <td><span style="font-weight:bolder;"></span></span><br><br></td>
+       
+        <td>Text disf sfjosdf sifjosifd iohsfs ijsfos isfjof oisjfoijsd isjfoisd </td>
+        
+      </tr>
+      
+    </tbody>
+
+</div>
+
 
 
 @endsection

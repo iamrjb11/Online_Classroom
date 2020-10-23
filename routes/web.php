@@ -26,6 +26,9 @@ Route::get('/login', function () {
 Route::get('/logout', 'LoginController@logout');
 
 Route::get('/student_panel', 'StudentPanelController@load_student_panel')->middleware('customAUTH');
+Route::get('/send_rqst/{s_id}/{c_id}/{t_id}', 'StudentPanelController@send_request')->middleware('customAUTH');
+Route::get('/accept_rqst/{srl}/{r_sts}', 'TeacherPanelController@accept_request')->middleware('customAUTH');
+Route::get('/delete_rqst/{srl}', 'TeacherPanelController@delete_request')->middleware('customAUTH');
 Route::post('/student_login', 'LoginController@student_login');
 Route::post('/teacher_login', 'LoginController@teacher_login');
 Route::post('/search_course', 'StudentPanelController@search_course');
