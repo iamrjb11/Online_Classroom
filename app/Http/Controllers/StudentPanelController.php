@@ -22,18 +22,24 @@ class StudentPanelController extends Controller
         $s_term = DB::select("select s_term from student_info where s_id=? ",[$s_id]);//string-array(pblm)
         $c_term = $s_term[0]->s_term;//convert array to string
 
+        //dropdown list er jonno
         $teacher_list = DB::select("select DISTINCT t_name from teacher_info order by t_name ");
         $varsity_list = DB::select("select DISTINCT t_varsity from teacher_info order by t_name ");
+        
         $course_list = DB::select("select DISTINCT c_name from course_list order by c_name ");
+        //end
         $course_sugg = DB::select("select * from course_list INNER JOIN teacher_info on course_list.t_id=teacher_info.t_id where course_list.c_term=?",[$c_term] );
-        $take_course = DB::select("select * from take_course");
+        $take_course = DB::select("select * from take_course where s_id=?",[$s_id]);
+        $course_name_list = DB::select("SELECT c_name FROM take_course INNER JOIN course_list on take_course.c_id=course_list.c_id where take_course.s_id=? and take_course.r_sts='1' ",[$s_id,]);
+        
+
         
         $search_course=null;
         //return session()->get('loginData');
         
         //only data return korbe...
         //return array('course_sugg'=>$course_sugg);
-        return view('student_panel',array('teacher_list'=>$teacher_list,'varsity_list'=>$varsity_list,'course_list'=>$course_list,'course_sugg'=>$course_sugg,'search_course'=>$search_course,'take_course'=>$take_course));
+        return view('student_panel',array('teacher_list'=>$teacher_list,'varsity_list'=>$varsity_list,'course_list'=>$course_list,'course_sugg'=>$course_sugg,'search_course'=>$search_course,'take_course'=>$take_course,'course_name_list'=>$course_name_list));
 
     }
 

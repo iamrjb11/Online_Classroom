@@ -19,7 +19,7 @@ class TeacherPanelController extends Controller
         $t_id = session()->get('id');
         //return $t_id;
         $course_list = DB::select("select c_name from course_list where t_id=? ",[$t_id]);
-        $noti_list = DB::select("SELECT * FROM student_info INNER JOIN take_course INNER JOIN course_list on student_info.s_id=take_course.s_id and take_course.c_id=course_list.c_id where take_course.t_id=? and r_sts='0' ",[$t_id]);
+        $noti_list = DB::select("SELECT * FROM student_info INNER JOIN take_course INNER JOIN course_list on student_info.s_id=take_course.s_id and take_course.c_id=course_list.c_id where take_course.t_id=? and r_sts='0' order by srl desc",[$t_id]);
         //return $course_list;
         return view('teacher_panel',array('course_list'=>$course_list,'noti_list'=>$noti_list));
 

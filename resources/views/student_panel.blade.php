@@ -6,7 +6,9 @@
 
 <div class="sidenav">
   <p id="sidenavT">Course List<br>------------</p>
-  <a href="#services">C Programming - need code</a>
+  @foreach($course_name_list as $dt)
+  <a href="#services">{{$dt->c_name}}</a>
+  @endforeach
   
 </div>
 <br>

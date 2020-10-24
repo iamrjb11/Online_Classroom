@@ -49,23 +49,25 @@
       </tr>
     </thead>
     <tbody>
-    @foreach($noti_list as $dt)
+    @for( $i=0;$i< count($noti_list);$i++ )
+    @if($i> 7) break @endif
   
     <tr>
-        <td>{{$dt->c_name}}</td>
+        <td>{{$noti_list[$i]->c_name}}</td>
         <td>img</td>
-        <td>{{$dt->s_name}} <br>{{$dt->s_dept}},{{$dt->s_varsity}} <br>{{$dt->s_term}}</td>
+        <td>{{$noti_list[$i]->s_name}} <br>{{$noti_list[$i]->s_dept}},{{$noti_list[$i]->s_varsity}} <br>{{$noti_list[$i]->s_term}}</td>
         <td>
           
-        <a class="btn btn-primary" href="{{url('accept_rqst')}}/{{$dt->srl}}/{{$dt->r_sts}}">Accept</a>
-        <a class="btn btn-danger" href="{{url('delete_rqst')}}/{{$dt->srl}}">Reject</a>
+        <a class="btn btn-primary" href="{{url('accept_rqst')}}/{{$noti_list[$i]->srl}}/{{$noti_list[$i]->r_sts}}">Accept</a>
+        <a class="btn btn-danger" href="{{url('delete_rqst')}}/{{$noti_list[$i]->srl}}">Reject</a>
                         
           
 
 
         </td>
       </tr>
-      @endforeach 
+      
+      @endfor
       
     </tbody>
 </div>
