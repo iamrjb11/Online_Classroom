@@ -44,7 +44,7 @@ class StudentPanelController extends Controller
     }
 
     public function search_course(Request $request){
-        
+        $s_id=session()->get('id');
         $course_name = $request->input('course_name');
         $teacher_name = $request->input('teacher_name');
         $varsity = $request->input('varsity');
@@ -64,17 +64,19 @@ class StudentPanelController extends Controller
         else if($course_name)
             $search_course = DB::select("SELECT * from course_list INNER JOIN teacher_info on course_list.t_id=teacher_info.t_id where course_list.c_name=? ",[$course_name]);
         
-            $c_term="1-1";
+        $c_term="1-1";
 
-            $teacher_list = DB::select("select DISTINCT t_name from teacher_info order by t_name ");
-            $varsity_list = DB::select("select DISTINCT t_varsity from teacher_info order by t_name ");
-            $course_list = DB::select("select DISTINCT c_name from course_list order by c_name ");
-            $course_sugg = DB::select("select * from course_list INNER JOIN teacher_info on course_list.t_id=teacher_info.t_id where course_list.c_term=?",[$c_term] );
-            $take_course = DB::select("select * from take_course");
+        $teacher_list = DB::select("select DISTINCT t_name from teacher_info order by t_name ");
+        $varsity_list = DB::select("select DISTINCT t_varsity from teacher_info order by t_name ");
+        $course_list = DB::select("select DISTINCT c_name from course_list order by c_name ");
+        $course_sugg = DB::select("select * from course_list INNER JOIN teacher_info on course_list.t_id=teacher_info.t_id where course_list.c_term=?",[$c_term] );
+        $take_course = DB::select("select * from take_course");
+        $course_name_list = DB::select("SELECT c_name FROM take_course INNER JOIN course_list on take_course.c_id=course_list.c_id where take_course.s_id=? and take_course.r_sts='1' ",[$s_id,]);
+        
             
             //only data return korbe...
             //return array('search_course'=>$search_course);
-            return view('student_panel',array('teacher_list'=>$teacher_list,'varsity_list'=>$varsity_list,'course_list'=>$course_list,'course_sugg'=>$course_sugg,'search_course'=>$search_course,'take_course'=>$take_course));
+            return view('student_panel',array('teacher_list'=>$teacher_list,'varsity_list'=>$varsity_list,'course_list'=>$course_list,'course_sugg'=>$course_sugg,'search_course'=>$search_course,'take_course'=>$take_course,'course_name_list'=>$course_name_list));
     
         
            // return view('student_panel',array('search_course'=>$search_course));

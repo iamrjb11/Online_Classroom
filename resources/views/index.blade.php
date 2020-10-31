@@ -22,7 +22,7 @@
               <div class="card mb-4 box-shadow">
                 <img class="card-img-top" src="/img/online_courses.png" alt="Card image cap">
                 <div class="card-body">
-                  <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>  
+                  <p class="card-text">In this online class you can easily search for the courses of your choice.</p>  
                 </div>
               </div>
             </div>
@@ -31,7 +31,9 @@
               <div class="card mb-4 box-shadow">
                 <img class="card-img-top" src="/img/document_share.png" alt="Card image cap" >
                 <div class="card-body">
-                  <p class="card-text">Documents shared by teachers in an online classroom enrich students learning quality.</p> 
+                  <p class="card-text">In this classroom teachers will be able to provide their 
+                  course related slides, PDFs, videos,  even topic related links for students 
+                  which will ensure a modern learning environment.</p> 
                 </div>
               </div>
             </div>
@@ -42,7 +44,7 @@
                 <div class="card-body">
                   <p class="card-text">There is no alternative to online exams to understand 
                   how students are learning as a result of teaching in online classes. 
-                  So quizzes are very important for a digital classroom.</p> 
+                  Through which teachers will be able to assess the knowledge of students.</p> 
                 </div>
               </div>
             </div>
