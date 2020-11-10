@@ -19,6 +19,13 @@ Route::get('/', function () {
 Route::get('/reg', function () {
     return view('reg');
 });
+
+
+Route::get('/course_studentpanel/{c_id}', 'CourseStudentPanelController@load_course_studentpanel')->middleware('customAUTH');
+
+
+Route::get('/course_teacherpanel/{c_id}', 'CourseTeacherPanelController@load_course_teacherpanel')->middleware('customAUTH');
+Route::post('/teacher_upload', 'CourseTeacherPanelController@upload');
 Route::get('/login', function () {
     return view('login',['message'=>'']);
 });

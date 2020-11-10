@@ -7,7 +7,7 @@
 <div class="sidenav">
   <p id="sidenavT">Course List<br>-------------</p>
   @foreach($course_list as $dt)
-    <a href="#services">{{$dt->c_name}}</a>
+    <a href="{{url('course_teacherpanel')}}/{{$dt->c_id}}">{{$dt->c_name}}</a>
   @endforeach  
 </div>
 

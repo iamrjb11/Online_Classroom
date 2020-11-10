@@ -30,7 +30,7 @@ class StudentPanelController extends Controller
         //end
         $course_sugg = DB::select("select * from course_list INNER JOIN teacher_info on course_list.t_id=teacher_info.t_id where course_list.c_term=?",[$c_term] );
         $take_course = DB::select("select * from take_course where s_id=?",[$s_id]);
-        $course_name_list = DB::select("SELECT c_name FROM take_course INNER JOIN course_list on take_course.c_id=course_list.c_id where take_course.s_id=? and take_course.r_sts='1' ",[$s_id,]);
+        $course_name_list = DB::select("SELECT course_list.c_id,course_list.c_name FROM take_course INNER JOIN course_list on take_course.c_id=course_list.c_id where take_course.s_id=? and take_course.r_sts='1' ",[$s_id,]);
         
 
         
