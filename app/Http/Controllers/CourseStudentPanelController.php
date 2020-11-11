@@ -22,25 +22,25 @@ class CourseStudentPanelController extends Controller
         return view('course_studentpanel',array('course_name'=>$course_name,'material_list'=>$material_list,'assignment_list'=>$assignment_list ));
         //return session()->get('c_id');
     }
-    public function upload(Request $request){
-        $t_id = session()->get('id');
+    public function submit_assignment(Request $request){
+        $s_id = session()->get('id');
         $c_id = session()->get('c_id');
-        $upload_type = $request->input('m_radio');
-        if($upload_type == "material"){
-            if( $file = $request->file('m_name') ){
-                //$material_name = $request->file('m_name');
-                $material_name=$file->getClientOriginalName();
-                //$material_path = rand().'.'.$material->getClientOriginalExtension();
-                $destinationPath = public_path('/my_files');
-                $file->move($destinationPath, $material_name);
-                $material_path = "/"."my_files"."/".$material_name;
-                //return $material_path;
+        
+        if( $file = $request->file('a_name') ){
+            $a_id = $request->input('a_id');
+            //$material_name = $request->file('m_name');
+            $a_name=$file->getClientOriginalName();
+            //$material_path = rand().'.'.$material->getClientOriginalExtension();
+            $destinationPath = public_path('/my_files');
+            $file->move($destinationPath, $a_name);
+            $a_path = "/"."my_files"."/".$a_name;
+            //return $material_path;
+        
+            DB::insert(" insert into submit_assignment (sa_name,sa_path,c_id,a_id,s_id) value(?,?,?,?,?) ",[$a_name,$a_path,$c_id,$a_id,$s_id]);
             
-                DB::insert(" insert into course_materials (m_name,m_path,t_id,c_id) value(?,?,?,?) ",[$material_name,$material_path,$t_id,$c_id]);
-                
-                return redirect()->back();
-            }
+            return redirect()->back();
         }
+    
         
         // $result = DB::select("select t_dept,t_varsity from teacher_info where t_id=? ",[$t_id]);//
         // $c_no = $request->input('c_no');

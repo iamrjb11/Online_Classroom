@@ -20,17 +20,17 @@
 
 <div class="main_coursePanel">
 <p style="font-size:20px;">Submit Assignment :</p>
-  <form method="post" enctype="multipart/form-data" action="/teacher_upload" id="borderStyle" >
+  <form method="post" enctype="multipart/form-data" action="/submit_assignment" id="borderStyle" >
 
   <input type="hidden" name="_token" value="{{ csrf_token() }}">
-  <select name="course_name" class="form-control">
+  <select name="a_id" class="form-control" required>
         <option value="">-- Select Assignment --</option>
         @foreach($assignment_list as $dt)
-        <option value="{{$dt->a_name}}">{{$dt->a_name}}</option>
+        <option value="{{$dt->a_id}}">{{$dt->a_name}}</option>
         @endforeach
   </select><br>
     <div class="form-group">
-      <input type="file" class="form-control" name="m_name">
+      <input type="file" class="form-control" name="a_name">
     </div>
     
       

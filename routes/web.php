@@ -21,7 +21,10 @@ Route::get('/reg', function () {
 });
 
 
+Route::get('/view_assignment/{c_id}/{a_id}', 'ViewAssignmentController@load_view_assignmentpanel')->middleware('customAUTH');
+
 Route::get('/course_studentpanel/{c_id}', 'CourseStudentPanelController@load_course_studentpanel')->middleware('customAUTH');
+Route::post('/submit_assignment', 'CourseStudentPanelController@submit_assignment')->middleware('customAUTH');
 
 
 Route::get('/course_teacherpanel/{c_id}', 'CourseTeacherPanelController@load_course_teacherpanel')->middleware('customAUTH');

@@ -16,7 +16,7 @@ class CourseTeacherPanelController extends Controller
     public function load_course_teacherpanel($c_id){
         $t_id = session()->get('id');
         session()->put('c_id',$c_id);
-        $course_name = DB::select("SELECT c_name FROM course_list WHERE c_id=?",[$c_id]);
+        $course_name = DB::select("SELECT c_id,c_name FROM course_list WHERE c_id=?",[$c_id]);
         $material_list = DB::select("select * from course_materials where t_id=? and c_id=?",[$t_id,$c_id]);
         $assignment_list = DB::select("select * from give_assignment where t_id=? and c_id=?",[$t_id,$c_id]);
         
