@@ -16,8 +16,11 @@ class CourseTeacherPanelController extends Controller
     public function load_course_teacherpanel($c_id){
         $t_id = session()->get('id');
         session()->put('c_id',$c_id);
+        $course_name = DB::select("SELECT c_name FROM course_list WHERE c_id=?",[$c_id]);
         $material_list = DB::select("select * from course_materials where t_id=? and c_id=?",[$t_id,$c_id]);
-        return view('course_teacherpanel',array('material_list'=>$material_list ));
+        $assignment_list = DB::select("select * from give_assignment where t_id=? and c_id=?",[$t_id,$c_id]);
+        
+        return view('course_teacherpanel',array('course_name'=>$course_name,'material_list'=>$material_list,'assignment_list'=>$assignment_list ));
         //return session()->get('c_id');
     }
     public function upload(Request $request){
@@ -35,6 +38,22 @@ class CourseTeacherPanelController extends Controller
                 //return $material_path;
             
                 DB::insert(" insert into course_materials (m_name,m_path,t_id,c_id) value(?,?,?,?) ",[$material_name,$material_path,$t_id,$c_id]);
+                
+                return redirect()->back();
+            }
+            
+        }
+        else{
+            if( $file = $request->file('m_name') ){
+                //$material_name = $request->file('m_name');
+                $assignment_name=$file->getClientOriginalName();
+                //$material_path = rand().'.'.$material->getClientOriginalExtension();
+                $destinationPath = public_path('/my_files');
+                $file->move($destinationPath, $assignment_name);
+                $assignment_path = "/"."my_files"."/".$assignment_name;
+                //return $material_path;
+            
+                DB::insert(" insert into give_assignment (a_name,a_path,t_id,c_id) value(?,?,?,?) ",[$assignment_name,$assignment_path,$t_id,$c_id]);
                 
                 return redirect()->back();
             }

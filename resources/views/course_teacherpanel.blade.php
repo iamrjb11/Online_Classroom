@@ -1,8 +1,9 @@
 @extends('layouts.app')
 
 @section('content')
+<h1 style="text-align:center"> {{$course_name[0]->c_name}} </h1>     
 
-    <h1 style="text-align:center"> Course Name</h1>      
+
 
 <div class="sidenav_coursePanel">
   <p id="sidenavT">Materials<br>--------------------</p>
@@ -11,6 +12,9 @@
   @endforeach 
   
   <p id="sidenavT">Assignments<br>--------------------</p>
+  @foreach($assignment_list as $dt)
+    <a href="http://127.0.0.1:8000{{$dt->a_path}}">{{$dt->a_name}}</a><br>
+  @endforeach 
   <p id="sidenavT">Quiz<br>--------------------</p>
   <a href="" class="btn btn-primary" style="color:white;">Create a Quiz</a>
 

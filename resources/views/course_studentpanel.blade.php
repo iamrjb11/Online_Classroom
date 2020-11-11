@@ -2,7 +2,7 @@
 
 @section('content')
 
-    <h1 style="text-align:center"> Course Name</h1>      
+  <h1 style="text-align:center"> {{$course_name[0]->c_name}} </h1>      
 
 <div class="sidenav_coursePanel">
   <p id="sidenavT">Materials<br>--------------------</p>
@@ -11,6 +11,9 @@
   @endforeach 
   
   <p id="sidenavT">Assignments<br>--------------------</p>
+  @foreach($assignment_list as $dt)
+    <a href="http://127.0.0.1:8000{{$dt->a_path}}">{{$dt->a_name}}</a><br>
+  @endforeach 
   <p id="sidenavT">Quiz<br>--------------------</p>
 
 </div>
@@ -20,6 +23,12 @@
   <form method="post" enctype="multipart/form-data" action="/teacher_upload" id="borderStyle" >
 
   <input type="hidden" name="_token" value="{{ csrf_token() }}">
+  <select name="course_name" class="form-control">
+        <option value="">-- Select Assignment --</option>
+        @foreach($assignment_list as $dt)
+        <option value="{{$dt->a_name}}">{{$dt->a_name}}</option>
+        @endforeach
+  </select><br>
     <div class="form-group">
       <input type="file" class="form-control" name="m_name">
     </div>
@@ -27,7 +36,7 @@
       
     
     
-    <input type="submit" style="width:100%" class="btn btn-success" value="Upload">
+    <input type="submit" style="width:100%" class="btn btn-success" value="Submit">
   </form>
 </div>
 
