@@ -27,6 +27,11 @@ Route::get('/course_studentpanel/{c_id}', 'CourseStudentPanelController@load_cou
 Route::post('/submit_assignment', 'CourseStudentPanelController@submit_assignment')->middleware('customAUTH');
 
 
+Route::get('/create_quiz/{c_id}', 'CreateQuizController@load_quizpanel')->middleware('customAUTH');
+Route::get('/quiz_test/{quiz_id}', 'QuizTestController@load_quiztest')->middleware('customAUTH');
+
+
+
 Route::get('/course_teacherpanel/{c_id}', 'CourseTeacherPanelController@load_course_teacherpanel')->middleware('customAUTH');
 Route::post('/teacher_upload', 'CourseTeacherPanelController@upload');
 Route::get('/login', function () {
