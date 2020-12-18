@@ -15,7 +15,9 @@
     <a href="http://127.0.0.1:8000{{$dt->a_path}}">{{$dt->a_name}}</a><br>
   @endforeach 
   <p id="sidenavT">Quiz<br>--------------------</p>
-
+  @foreach($quiz_list as $dt)
+    <a href="http://127.0.0.1:8000/quiz_test/{{$dt->quiz_id}}">{{$dt->quiz_name}}</a><br>
+  @endforeach 
 </div>
 
 <div class="main_coursePanel">

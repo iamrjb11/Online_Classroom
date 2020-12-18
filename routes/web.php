@@ -29,6 +29,8 @@ Route::post('/submit_assignment', 'CourseStudentPanelController@submit_assignmen
 
 Route::get('/create_quiz/{c_id}', 'CreateQuizController@load_quizpanel')->middleware('customAUTH');
 Route::get('/quiz_test/{quiz_id}', 'QuizTestController@load_quiztest')->middleware('customAUTH');
+Route::post('/submit_quiz', 'QuizTestController@submit_quiz')->middleware('customAUTH');
+Route::post('/create_quiz', 'CreateQuizController@create_quiz')->middleware('customAUTH');
 
 
 

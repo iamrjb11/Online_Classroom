@@ -17,9 +17,10 @@ class CourseStudentPanelController extends Controller
         $s_id = session()->get('id');
         session()->put('c_id',$c_id);
         $course_name = DB::select("SELECT c_name FROM course_list WHERE c_id=?",[$c_id]);
+        $quiz_list = DB::select("SELECT * FROM quiz_list WHERE c_id=?",[$c_id]);
         $material_list = DB::select("SELECT * FROM take_course INNER JOIN course_materials on take_course.c_id=course_materials.c_id WHERE take_course.s_id=?",[$s_id]);
         $assignment_list = DB::select("SELECT * FROM take_course INNER JOIN give_assignment on take_course.c_id=give_assignment.c_id WHERE take_course.s_id=?",[$s_id]);
-        return view('course_studentpanel',array('course_name'=>$course_name,'material_list'=>$material_list,'assignment_list'=>$assignment_list ));
+        return view('course_studentpanel',array('course_name'=>$course_name,'quiz_list'=>$quiz_list,'material_list'=>$material_list,'assignment_list'=>$assignment_list ));
         //return session()->get('c_id');
     }
     public function submit_assignment(Request $request){

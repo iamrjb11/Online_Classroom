@@ -14,8 +14,31 @@ use Auth;
 class QuizTestController extends Controller
 {
     public function load_quiztest($quiz_id){
+        
+        session()->put('quiz_id',$quiz_id);
         $data = DB::select("SELECT * FROM question_list inner JOIN questions_options on question_list.q_id=questions_options.q_id WHERE question_list.quiz_id=?",[$quiz_id]);
     
         return view('quiz_test',array('data'=>$data));
+    }
+    public function submit_quiz(Request $request){
+        $quiz_id = session()->get('quiz_id');
+        $s_id = session()->get('id');
+        $points = 0;
+        $data = DB::select("SELECT * FROM question_list inner JOIN questions_options on question_list.q_id=questions_options.q_id WHERE question_list.quiz_id=?",[$quiz_id]);
+        
+        for($j=1,$i=0;$j <= 10;$i=$i+4,$j++){
+            $q_ans = $request->input('qq'.$j);
+            $real_q_ans =  DB::select("select q_ans from question_list where q_id=?",[$data[$i]->q_id]);
+            //return $real_q_ans[0]->q_ans;
+            if($q_ans == $real_q_ans[0]->q_ans){
+                $points++;
+            }
+
+        }
+        return $points;
+    
+    
+    
+    
     }
 }
