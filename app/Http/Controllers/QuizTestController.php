@@ -13,17 +13,23 @@ use Auth;
 
 class QuizTestController extends Controller
 {
-    public function load_quiztest($quiz_id){
+    public function load_quiztest($quiz_id,$c_id){
         
         session()->put('quiz_id',$quiz_id);
+        session()->put('c_id',$c_id);
+        $quiz_name = DB::select("SELECT * FROM quiz_list where quiz_id=?",[$quiz_id]);
+        $course_name = DB::select("SELECT * FROM course_list where c_id=?",[$c_id]);
         $data = DB::select("SELECT * FROM question_list inner JOIN questions_options on question_list.q_id=questions_options.q_id WHERE question_list.quiz_id=?",[$quiz_id]);
     
-        return view('quiz_test',array('data'=>$data));
+        return view('quiz_test',array('data'=>$data,'quiz_name'=>$quiz_name,'course_name'=>$course_name));
     }
     public function submit_quiz(Request $request){
         $quiz_id = session()->get('quiz_id');
+        $c_id = session()->get('c_id');
         $s_id = session()->get('id');
         $points = 0;
+        $quiz_name = DB::select("SELECT * FROM quiz_list where quiz_id=?",[$quiz_id]);
+        $course_name = DB::select("SELECT * FROM course_list where c_id=?",[$c_id]);
         $data = DB::select("SELECT * FROM question_list inner JOIN questions_options on question_list.q_id=questions_options.q_id WHERE question_list.quiz_id=?",[$quiz_id]);
         
         for($j=1,$i=0;$j <= 10;$i=$i+4,$j++){
@@ -35,7 +41,8 @@ class QuizTestController extends Controller
             }
 
         }
-        return $points;
+        //return $points;
+        return view('quiz_result',array('data'=>$data,'points'=>$points,'quiz_name'=>$quiz_name,'course_name'=>$course_name));
     
     
     

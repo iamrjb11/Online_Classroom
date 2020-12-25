@@ -30,11 +30,32 @@
 
     </style>
     <script type="text/javascript">
-
+function myFunction(i,j) {
+    if(j==0){
+        i=i-1;
+        j=60;
+    }
+    if(j==50){
+        var ff=document.getElementById("submit_quiz");
+        ff.submit();
+    }
+        
+    j=j-1;
+    setTimeout(function(){ 
+        document.getElementById("timer").innerHTML =i+" "+j;
+        myFunction(i,j);
+    }, 1000);
+  
+}
 </script>
 </head>
 
-<body>
+<body
+<?php if(Session::get('id')){ ?>
+    onload="myFunction(9,60)"<?php
+}
+?>
+>
     <div id="app">
         <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
             <div class="container">

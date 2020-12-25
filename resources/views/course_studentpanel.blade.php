@@ -16,7 +16,7 @@
   @endforeach 
   <p id="sidenavT">Quiz<br>--------------------</p>
   @foreach($quiz_list as $dt)
-    <a href="http://127.0.0.1:8000/quiz_test/{{$dt->quiz_id}}">{{$dt->quiz_name}}</a><br>
+    <a href="http://127.0.0.1:8000/quiz_test/{{$dt->quiz_id}}/{{$course_name[0]->c_id}}">{{$dt->quiz_name}}</a><br>
   @endforeach 
 </div>
 

@@ -16,7 +16,7 @@ class CourseStudentPanelController extends Controller
     public function load_course_studentpanel($c_id){
         $s_id = session()->get('id');
         session()->put('c_id',$c_id);
-        $course_name = DB::select("SELECT c_name FROM course_list WHERE c_id=?",[$c_id]);
+        $course_name = DB::select("SELECT * FROM course_list WHERE c_id=?",[$c_id]);
         $quiz_list = DB::select("SELECT * FROM quiz_list WHERE c_id=?",[$c_id]);
         $material_list = DB::select("SELECT * FROM take_course INNER JOIN course_materials on take_course.c_id=course_materials.c_id WHERE take_course.s_id=?",[$s_id]);
         $assignment_list = DB::select("SELECT * FROM take_course INNER JOIN give_assignment on take_course.c_id=give_assignment.c_id WHERE take_course.s_id=?",[$s_id]);

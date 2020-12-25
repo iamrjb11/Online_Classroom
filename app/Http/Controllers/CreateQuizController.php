@@ -22,7 +22,7 @@ class CreateQuizController extends Controller
     public function create_quiz(Request $request){
         $c_id = session()->get('c_id');
         $quiz_name = $request->input('quiz_name');
-        DB::insert(" insert into quiz_list (quiz_name,c_id) value(?)",[$quiz_name,$c_id]);
+        DB::insert(" insert into quiz_list (quiz_name,c_id) value(?,?)",[$quiz_name,$c_id]);
         $quiz_id =  DB::select("select count(*) as ID from quiz_list");
         //return $quiz_id[0]->ID;
         for($i=1;$i <= 10;$i++){
@@ -39,5 +39,8 @@ class CreateQuizController extends Controller
             }
         }
         return redirect()->back();
+    }
+    public function test(Request $request){
+        return "LOL";
     }
 }
