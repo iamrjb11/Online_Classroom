@@ -4,10 +4,10 @@
 
     <h1 style="text-align:center"> WELCOME TO YOUR DASHBOARD</h1>      
 
-<div class="sidenav">
-  <p id="sidenavT">Course List<br>-------------</p>
+<div class="sidenavT">
+  <p id="sidenavT_text">Course List<br>-------------</p>
   @foreach($course_list as $dt)
-    <a href="{{url('course_teacherpanel')}}/{{$dt->c_id}}">{{$dt->c_name}}</a>
+    <a href="{{url('course_teacherpanel')}}/{{$dt->c_id}}">{{$dt->c_name}}</a><br>
   @endforeach  
 </div>
 

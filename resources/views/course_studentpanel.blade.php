@@ -5,16 +5,16 @@
   <h1 style="text-align:center"> {{$course_name[0]->c_name}} </h1>      
 
 <div class="sidenav_coursePanel">
-  <p id="sidenavT">Materials<br>--------------------</p>
+  <p id="sidenavT_text">Materials<br>--------------------</p>
   @foreach($material_list as $dt)
     <a href="http://127.0.0.1:8000{{$dt->m_path}}">{{$dt->m_name}}</a><br>
   @endforeach 
   
-  <p id="sidenavT">Assignments<br>--------------------</p>
+  <p id="sidenavT_text">Assignments<br>--------------------</p>
   @foreach($assignment_list as $dt)
     <a href="http://127.0.0.1:8000{{$dt->a_path}}">{{$dt->a_name}}</a><br>
   @endforeach 
-  <p id="sidenavT">Quiz<br>--------------------</p>
+  <p id="sidenavT_text">Quiz<br>--------------------</p>
   @foreach($quiz_list as $dt)
     <a href="http://127.0.0.1:8000/quiz_test/{{$dt->quiz_id}}/{{$course_name[0]->c_id}}">{{$dt->quiz_name}}</a><br>
   @endforeach 

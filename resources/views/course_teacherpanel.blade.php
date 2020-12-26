@@ -6,16 +6,19 @@
 
 
 <div class="sidenav_coursePanel">
-  <p id="sidenavT">Materials<br>--------------------</p>
+  <p id="sidenavT_text">Materials<br>--------------------</p>
   @foreach($material_list as $dt)
     <a href="http://127.0.0.1:8000{{$dt->m_path}}">{{$dt->m_name}}</a><br>
   @endforeach 
   
-  <p id="sidenavT">Assignments<br>--------------------</p>
+  <p id="sidenavT_text">Assignments<br>--------------------</p>
   @foreach($assignment_list as $dt)
     <a href="http://127.0.0.1:8000{{$dt->a_path}}">{{$dt->a_name}}</a> <a href="http://127.0.0.1:8000/view_assignment/{{$course_name[0]->c_id}}/{{$dt->a_id}}" class="btn btn-primary">view</a><br>
   @endforeach 
-  <p id="sidenavT">Quiz<br>--------------------</p>
+  <p id="sidenavT_text">Quiz<br>--------------------</p>
+  @foreach($quiz_list as $dt)
+    <a href="http://127.0.0.1:8000/edit_quiz/{{$dt->quiz_id}}/{{$course_name[0]->c_id}}">{{$dt->quiz_name}}</a><br>
+  @endforeach 
   <a href="http://127.0.0.1:8000/create_quiz/{{$course_name[0]->c_id}}" class="btn btn-primary" style="color:white;">Create a Quiz</a>
 
 </div>

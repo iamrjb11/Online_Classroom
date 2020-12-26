@@ -1,7 +1,20 @@
 
 
 
-.sidenav {
+.sidenavS {
+  height: 100%;
+  width: 20%;
+  position: static;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  border-right: 2px solid #2f00ff;
+  border-radius: 0px;
+  overflow-x: hidden;
+  padding-top: 0px;
+  float: left;
+}
+.sidenavT {
   height: 100%;
   width: 15%;
   position: static;
@@ -11,7 +24,7 @@
   border-right: 2px solid #2f00ff;
   border-radius: 0px;
   overflow-x: hidden;
-  padding-top: 0px;
+  padding-left: 20px;
   float: left;
 }
 
@@ -50,8 +63,7 @@
   display: block;
 }
 
-#sidenavT {
-  padding: 0px 0px 0px 20px;
+#sidenavT_text {
   text-decoration: none;
   font-size: 30px;
   color: #000000;

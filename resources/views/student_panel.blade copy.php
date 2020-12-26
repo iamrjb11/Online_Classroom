@@ -4,7 +4,7 @@
 
     <h1 style="text-align:center"> WELCOME TO YOUR DASHBOARD</h1>      
 
-<div class="sidenavS">
+<div class="sidenav">
   <p id="sidenavT">Course List<br>------------</p>
   @foreach($course_name_list as $dt)
   <a href="{{url('course_studentpanel')}}/{{$dt->c_id}}">{{$dt->c_name}}</a>
@@ -146,4 +146,34 @@ Search Course :
 
 
 </div>
+<div class="sidenavR_S">
+  <p id="sidenavT">Notifications</p>
+ 
+  
+
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>Course Name</th>
+        <th>Student Details</th>
+        <th>Action</th>
+      </tr>
+    </thead>
+    <tbody>
+    
+    <tr>
+        <td><br><span style="font-weight:bolder;color:blue;font-size:17px"></span></span><br>Credit : <br>Term : </td>
+        
+        <td><span style="font-weight:bolder;"></span></span><br><br></td>
+       
+        <td>Text disf sfjosdf sifjosifd iohsfs ijsfos isfjof oisjfoijsd isjfoisd </td>
+        
+      </tr>
+      
+    </tbody>
+
+</div>
+
+
+
 @endsection
