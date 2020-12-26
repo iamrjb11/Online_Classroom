@@ -14,7 +14,9 @@ use Auth;
 class QuizTestController extends Controller
 {
     public function load_quiztest($quiz_id,$c_id){
-        
+        //for quiz timer
+        session()->put('quiz_start',1);
+
         session()->put('quiz_id',$quiz_id);
         session()->put('c_id',$c_id);
         $quiz_name = DB::select("SELECT * FROM quiz_list where quiz_id=?",[$quiz_id]);
@@ -24,6 +26,9 @@ class QuizTestController extends Controller
         return view('quiz_test',array('data'=>$data,'quiz_name'=>$quiz_name,'course_name'=>$course_name));
     }
     public function submit_quiz(Request $request){
+        //for quiz timer
+        session()->put('quiz_start',0);
+        
         $quiz_id = session()->get('quiz_id');
         $c_id = session()->get('c_id');
         $s_id = session()->get('id');

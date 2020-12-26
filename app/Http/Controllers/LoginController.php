@@ -16,6 +16,8 @@ use Auth;
 class LoginController extends Controller
 {
     public function student_login(Request $request){
+        //for quiz timer
+        session()->put('quiz_start',0);
         
         $s_email = $request->input('s_email');
         $s_password = $request->input('s_password');

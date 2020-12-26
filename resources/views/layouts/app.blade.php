@@ -42,7 +42,7 @@ function myFunction(i,j) {
         
     j=j-1;
     setTimeout(function(){ 
-        document.getElementById("timer").innerHTML =i+" "+j;
+        document.getElementById("timer").innerHTML =i+" : "+j;
         myFunction(i,j);
     }, 1000);
   
@@ -51,7 +51,9 @@ function myFunction(i,j) {
 </head>
 
 <body
-<?php if(Session::get('id')){ ?>
+<?php 
+$v = Session::get('quiz_start');
+if($v==1){ ?>
     onload="myFunction(9,60)"<?php
 }
 ?>

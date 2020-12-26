@@ -14,6 +14,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
+    session()->put('quiz_start',0);
     return view('index');
 });
 Route::get('/reg', function () {
