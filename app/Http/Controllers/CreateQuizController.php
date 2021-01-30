@@ -20,7 +20,7 @@ class CreateQuizController extends Controller
 
         return view('create_quiz',array('course_details'=>$course_details));
     }
-    public function edit_quiz($quiz_id,$c_id){
+    public function edit_quiz($quiz_id,$c_id){ 
         //return "OK";
         session()->put('c_id',$c_id);
         session()->put('e_sts',1);
